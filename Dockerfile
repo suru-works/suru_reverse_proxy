@@ -14,7 +14,7 @@ RUN pip install certbot-nginx
 COPY index.html /var/www/
 
 # Copiar el archivo de configuración del servidor proxy inverso
-COPY proxy.conf /etc/nginx/conf.d/
+COPY default.conf /etc/nginx/conf.d/
 
 EXPOSE 80
 EXPOSE 443 

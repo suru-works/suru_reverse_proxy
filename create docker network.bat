@@ -1,0 +1,1 @@
+docker network create suru_docker_network
