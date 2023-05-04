@@ -1,0 +1,37 @@
+version: '3.1'
+services:
+  edm_front:
+    container_name: edm_front_container
+    image: edm_front
+    networks:
+      - suru_docker_network
+    hostname: edm_front_container
+    restart: always
+  hes_front:
+    container_name: hes_front_container
+    image: hes_front
+    networks:
+      - suru_docker_network
+    hostname: hes_front_container
+    restart: always
+  suru_reverse_proxy:
+    container_name: suru_reverse_proxy_container
+    image: suru_reverse_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certsVolume:/var/www/certbot
+      - certsVolume:/etc/letsencrypt
+    networks:
+      - suru_docker_network
+    hostname: suru_reverse_proxy_container
+    restart: unless-stopped
+
+networks:
+  suru_docker_network:
+    external: true
+
+volumes:
+  certsVolume:
+    external: true
